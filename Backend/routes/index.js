@@ -22,6 +22,8 @@ router.post("/register", AuthController.register)
 //Logout
 router.post("/logout", auth, AuthController.logout)
 //refresh
+router.get("/refreshtoken", AuthController.refreshToken)
+
 
 //Blog
 //CRUD

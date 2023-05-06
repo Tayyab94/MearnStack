@@ -200,6 +200,63 @@ const AuthController = {
 
         // 3 Response
         res.status(200).json({ user: null, auth: false })
+    },
+
+    async refreshToken(req, res, next) {
+        // 1. get refreshToken from cookies
+        const originalRefreshToken = req.cookies.refreshToken;
+        let id;
+        try {
+            id = JWTService.verifyRefreshToken(originalRefreshToken)._id;
+        } catch (e) {
+            const error = {
+                status: 401,
+                message: "Unauthorized"
+            }
+            return next(error);
+        }
+        try {
+
+            const match = RefreshToken.findOne({ _id: id, token: originalRefreshToken });
+            if (!match) {
+                const error = {
+                    status: 401,
+                    message: "Unauthorized",
+                };
+
+                return next(error);
+            }
+        } catch (error) {
+            return next(error);
+        }
+
+        try {
+            const accessToken = JWTService.SignAccessToken({ _id: id }, "30m");
+            const refreshToken = JWTService.SignRefreshToken({ _id: id }, "60m");
+
+            await RefreshToken.updateOne({ _id: id }, { token: refreshToken });
+
+            res.cookie("accessToken", accessToken, {
+                maxAge: 1000 * 60 * 60 * 24,
+                httpOnly: true,
+            });
+
+            res.cookie("refreshToken", refreshToken, {
+                maxAge: 1000 * 60 * 60 * 24,
+                httpOnly: true,
+            });
+        } catch (error) {
+            return next(error);
+        }
+        // 2. verify refreshToken
+        // 3. generate new tokens
+        // 4. update db, return response
+        const user = await User.findOne({ _id: id });
+
+        const userDto = new UserDTO(user);
+
+        return res.status(200).json({ user: userDto, auth: true });
+
     }
 }
 
