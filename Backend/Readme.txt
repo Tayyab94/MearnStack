@@ -10,3 +10,5 @@ npm i joi  (This library is use to validate the model validation)
 npm i bcryptjs (User Encryption)
 
 npm i jsonwebtoeken (This package is use for JwT token)
+
+npm i cookie-parser

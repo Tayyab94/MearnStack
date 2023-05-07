@@ -15,7 +15,7 @@ app.use(express.json());
 
 app.use(router);
 dbConnect();
-
+app.use("/storeage", express.static("storeage"))
 // app.get("/", (req, res) => {
 //     res.json({ msg: "Tayyab" });
 
