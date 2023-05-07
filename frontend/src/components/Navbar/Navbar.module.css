@@ -58,3 +58,9 @@
   color: black;
   background-color: rgb(255, 255, 255);
 }
+
+.separator {
+  height: 1px;
+  margin-top: 1px;
+  background: linear-gradient(to right, transparent, #9ba3c2, transparent);
+}
