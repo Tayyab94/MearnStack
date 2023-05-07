@@ -1,0 +1,26 @@
+.error {
+  color: red;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.error h1 {
+  margin-top: 10rem;
+  color: red;
+}
+
+.error span {
+  font-size: 60px;
+}
+.error div {
+  margin-top: 1rem;
+}
+
+.homebtn {
+  text-decoration: none;
+  color: red;
+  font-weight: bold;
+  font-size: 22px;
+}

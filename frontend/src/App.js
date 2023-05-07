@@ -5,8 +5,11 @@ import Navbar from './components/Navbar/navbar';
 import Footer from './components/Footer/Footer';
 import Home from './pages/Home/Home';
 import styles from "./App.module.css"
+import Protected from "./components/Protected/protected";
+import ErrorPage from "./pages/Error/ErrorPage";
 
 function App() {
+  const isAuth = false;
   return (
     <div className={styles.container}>
       <BrowserRouter>
@@ -32,16 +35,26 @@ function App() {
             <Route
               path='blog'
               exact
-              element={<div className={styles.main}>
-                <div>Blog Page</div>
-              </div>}
+              element={
+                <Protected isAuthenticated={isAuth}>
+                  <div className={styles.main}>
+                    <div>Blog Page</div>
+                  </div>
+                </Protected>
+
+              }
             />
             <Route
               path='submit'
               exact
-              element={<div className={styles.main}>
-                <div>Blog Submit page </div>
-              </div>}
+              element={
+                <Protected isAuthenticated={isAuth}>
+                  <div className={styles.main}>
+                    <div>Blog Submit page </div>
+                  </div>
+                </Protected>
+
+              }
             />
 
             <Route
@@ -58,6 +71,12 @@ function App() {
                 <div>Register</div>
               </div>}
             />
+
+            <Route
+              path="*"
+              element={<div className={styles.main}>
+                <ErrorPage />
+              </div>} />
           </Routes>
 
           <Footer />
