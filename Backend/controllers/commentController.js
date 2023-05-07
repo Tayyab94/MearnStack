@@ -56,7 +56,6 @@ const CommentController = {
         let comments;
 
         try {
-            //check this code is correct or not
             comments = await Comment.find({ blog: id }).populate('author');
         }
         catch (error) {
