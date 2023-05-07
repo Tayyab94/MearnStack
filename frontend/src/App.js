@@ -7,6 +7,7 @@ import Home from './pages/Home/Home';
 import styles from "./App.module.css"
 import Protected from "./components/Protected/protected";
 import ErrorPage from "./pages/Error/ErrorPage";
+import Login from "./pages/Login/Login";
 
 function App() {
   const isAuth = false;
@@ -61,7 +62,7 @@ function App() {
               path='login'
               exact
               element={<div className={styles.main}>
-                <div>Login page</div>
+                <Login />
               </div>}
             />
             <Route

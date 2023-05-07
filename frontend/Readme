@@ -1,1 +1,10 @@
 First we have to install react-router-dome
+
+
+npm i @reduxjs/toolkit
+
+npm i react-redux
+
+
+.. npm i formik
+  npm i yup
